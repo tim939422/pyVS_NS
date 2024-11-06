@@ -1,0 +1,25 @@
+# Case specific input parameters
+itype = 0
+is_forced = True
+force = 0.02
+Utop = None
+
+# Dimension and geometry
+Nx = 16
+Ny = 128
+Lx = 0.25
+Ly = 2.0
+
+# Fluid properties
+ifluid = 0
+mu_s = 0.01
+mu_p = 0.0025
+tau_p = 10.0
+
+# Time control
+dt = 0.01
+t_final = 1000.0
+
+# IO stuff
+output = planar_Poiseuille_Newtonian
+iprint = 500
