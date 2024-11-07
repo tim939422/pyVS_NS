@@ -1,30 +1,30 @@
 # Case specific input parameters
 # 0 = start-up planar Poiseuille flow (driven by -dP/dx = 0.02 Pa/m)
 # 1 = cavity flow (driven by lid moving at U = 1 m/s)
-itype = 0
-is_forced = True
+itype = 1
+is_forced = False
 force = 0.02
-Utop = None
+Utop = 1.0
 
 # Dimension and geometry
-Nx = 16
-Ny = 128
-Lx = 0.25
-Ly = 2.0
+Nx = 64
+Ny = 64
+Lx = 1.0
+Ly = 1.0
 
 # Fluid properties
 # 0 = Newtonian with viscosity mu_s
 # 1 = Oldroyd-B
-ifluid = 0
+ifluid = 1
 mu_s = 0.01
 mu_p = 0.0025
-tau_p = 10.0
+tau_p = 0.03
 
 # Time control
-dt = 0.01
-t_final = 1000.0
+dt = 0.0001
+t_final = 1
 
 # IO stuff
-output = planar_Poiseuille_Newtonian
+output = cavity_Oldroyd-B
 iprint = 500
-ivisu = 5000
+ivisu  = 500

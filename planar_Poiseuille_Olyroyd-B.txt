@@ -15,7 +15,7 @@ Ly = 2.0
 # Fluid properties
 # 0 = Newtonian with viscosity mu_s
 # 1 = Oldroyd-B
-ifluid = 0
+ifluid = 1
 mu_s = 0.01
 mu_p = 0.0025
 tau_p = 10.0
@@ -25,6 +25,6 @@ dt = 0.01
 t_final = 1000.0
 
 # IO stuff
-output = planar_Poiseuille_Newtonian
+output = planar_Poiseuille_Oldroyd-B
 iprint = 500
 ivisu = 5000
