@@ -20,6 +20,8 @@ if __name__ == "__main__":
     is_forced = params.get("is_forced")
     force = params.get("force")
     Utop = params.get("Utop")
+    
+
 
     Nx = params.get("Nx")
     Ny = params.get("Ny")
@@ -27,6 +29,11 @@ if __name__ == "__main__":
     Ly = params.get("Ly")
     dx = Lx / Nx
     dy = Ly / Ny
+
+    # # ugly top velocity
+    xfuck = np.arange(Nx + 2)*dx
+    Utop = 8*(1 + np.tanh(-4))*xfuck**2*(1 - xfuck)**2
+    Utop[-1] = 0.0
 
     ifluid = params.get("ifluid")
     mu_s = params.get("mu_s")
@@ -156,7 +163,7 @@ if __name__ == "__main__":
         if it % iprint == 0:
             print_step(it, tnow, u[1:-1, :-1], v[:-1, 1:-1], div[1:-1, 1:-1])
         if it % ivisu == 0:
-            fname = os.path.join(output, f"visu_{it:06d}.h5")
+            fname = os.path.join(output, f"visu_{it}.h5")
             write_visu(fname, it, tnow, Nx, Ny, Lx, Ly, u_n[:-1, :-1], v_n[:-1, :-1], p[1:-1, 1:-1], Cmat[:, 1:-1, 1:-1])
             print(f"Saving {fname}")
         
@@ -178,6 +185,9 @@ if __name__ == "__main__":
         # add body force
         if is_forced:
             rhs_u += force
+
+        Utop = 8*(1 + np.tanh(tnow + dt - 4))*xfuck**2*(1 - xfuck)**2
+        Utop[-1] = 0.0
 
         # now u and v is the tentative velocity
         u += dt*rhs_u
@@ -229,8 +239,9 @@ if __name__ == "__main__":
         f.create_dataset("u", data=u[1:-1, :-1])
         f.create_dataset("v", data=v[:-1, 1:-1])
         f.create_dataset("p", data=p[1:-1, 1:-1])
+        f.create_dataset("Cmat", data=Cmat[:, 1:-1, 1:-1])
 
-    fname = os.path.join(output, f"visu_{it:06d}.h5")
+    fname = os.path.join(output, f"visu_{it}.h5")
     write_visu(fname, it, tnow, Nx, Ny, Lx, Ly, u_n[:-1, :-1], v_n[:-1, :-1], p[1:-1, 1:-1], Cmat[:, 1:-1, 1:-1])
 
     

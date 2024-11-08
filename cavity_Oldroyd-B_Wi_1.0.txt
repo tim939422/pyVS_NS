@@ -17,14 +17,14 @@ Ly = 1.0
 # 1 = Oldroyd-B
 ifluid = 1
 mu_s = 0.01
-mu_p = 0.0025
+mu_p = 0.01
 tau_p = 1.0
 
 # Time control
-dt = 0.001
-t_final = 10
+dt = 0.00001
+t_final = 40
 
 # IO stuff
-output = cavity_Oldroyd-B
+output = cavity/Wi_1d0
 iprint = 500
-ivisu  = 500
+ivisu  = 50000

@@ -15,16 +15,16 @@ Ly = 1.0
 # Fluid properties
 # 0 = Newtonian with viscosity mu_s
 # 1 = Oldroyd-B
-ifluid = 1
+ifluid = 0
 mu_s = 0.01
-mu_p = 0.0025
-tau_p = 1.0
+mu_p = 0.005
+tau_p = 0.5
 
 # Time control
 dt = 0.001
 t_final = 10
 
 # IO stuff
-output = cavity_Oldroyd-B
+output = cavity/regularised/Newtonian
 iprint = 500
 ivisu  = 500
