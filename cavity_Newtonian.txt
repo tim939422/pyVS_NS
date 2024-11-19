@@ -16,15 +16,15 @@ Ly = 1.0
 # 0 = Newtonian with viscosity mu_s
 # 1 = Oldroyd-B
 ifluid = 0
-mu_s = 10.0
+mu_s = 0.01
 mu_p = 0.0025
 tau_p = 10.0
 
 # Time control
-dt = 1e-6
+dt = 1e-3
 t_final = 10.0
 
 # IO stuff
-output = cavity/creep
+output = cavity_test
 iprint = 500
 ivisu  = 500000

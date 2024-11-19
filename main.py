@@ -31,9 +31,9 @@ if __name__ == "__main__":
     dy = Ly / Ny
 
     # # ugly top velocity
-    xfuck = np.arange(Nx + 2)*dx
-    Utop = 8*(1 + np.tanh(-4))*xfuck**2*(1 - xfuck)**2
-    Utop[-1] = 0.0
+    # xfuck = np.arange(Nx + 2)*dx
+    # Utop = 8*(1 + np.tanh(-4))*xfuck**2*(1 - xfuck)**2
+    # Utop[-1] = 0.0
 
     ifluid = params.get("ifluid")
     mu_s = params.get("mu_s")
@@ -186,8 +186,8 @@ if __name__ == "__main__":
         if is_forced:
             rhs_u += force
 
-        Utop = 8*(1 + np.tanh(tnow + dt - 4))*xfuck**2*(1 - xfuck)**2
-        Utop[-1] = 0.0
+        # Utop = 8*(1 + np.tanh(tnow + dt - 4))*xfuck**2*(1 - xfuck)**2
+        # Utop[-1] = 0.0
 
         # now u and v is the tentative velocity
         u += dt*rhs_u
@@ -201,6 +201,7 @@ if __name__ == "__main__":
         div = (dudx + dvdy)/dt # RHS
         p_corr[jb:je + 1, ib:ie + 1] = p_solver.solve(div[jb:je + 1, ib:ie + 1])
         set_pressure_bc(itype, p, ib, ie, jb, je)
+        print(np.sum(p_corr[jb:je+1, ib:ie + 1]))
 
         '''
         corrector step
@@ -233,7 +234,8 @@ if __name__ == "__main__":
     it += 1
     print_step(it, tnow, u[1:-1, :-1], v[:-1, 1:-1], div[1:-1, 1:-1])
 
-
+    u.tofile("/Users/duosifan/Desktop/code_development/solvers/CSprayCFD/scratch/u_ref.bin")
+    
     fname = os.path.join(output, "restart.h5")
     with h5py.File(fname, "w") as f:
         f.create_dataset("u", data=u[1:-1, :-1])
